@@ -9,8 +9,8 @@
     "codex"
   ],
   "skills": {
-    "presentation-creator": {
-      "source": "skills/presentation-creator/presentation-creator.md",
+    "tech-demo-director": {
+      "source": "skills/tech-demo-director/tech-demo-director.md",
       "fragments": [
         "common/output-format.md",
         "common/say-block-guidelines.md",

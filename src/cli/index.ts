@@ -11,9 +11,9 @@ import { rehearseCommand } from './commands/rehearse.js';
 import { AppError } from '../errors/types.js';
 
 const program = new Command()
-  .name('presentation-util')
+  .name('demo-director')
   .version('1.0.0', '-v, --version')
-  .description('Companion CLI for the presentation-creator skill');
+  .description('Companion CLI for the tech-demo-director skill');
 
 // ---- Command: validate-outline ----
 

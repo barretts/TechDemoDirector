@@ -37,7 +37,7 @@ const COMPILED_DIR = join(PROJECT_ROOT, 'compiled');
 const MANIFEST_PATH = join(__dirname, 'manifest.json');
 
 // ---- CUSTOMIZE: Change this marker to identify files managed by your project ----
-const MANAGED_BY = 'managed_by: presentation-creator';
+const MANAGED_BY = 'managed_by: tech-demo-director';
 
 // ---------------------------------------------------------------------------
 // CLI
