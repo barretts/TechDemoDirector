@@ -1,4 +1,0 @@
-interface:
-  display_name: "Presentation Creator"
-  short_description: "Create code walk-through presentations with file:line references and speaker notes"
-  default_prompt: "Use $presentation-creator to build a presentation script for a code walk-through. Read SKILL.md for the output format, six-step workflow, and pacing calibration. Ask me about the audience, duration, and narrative arc."

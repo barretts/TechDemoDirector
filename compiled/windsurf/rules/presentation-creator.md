@@ -1,6 +1,7 @@
 ---
-name: presentation-creator
-description: "Create code walk-through presentation scripts with file:line references and speaker notes. Produces a structured outline where each talking point opens a specific file at a specific line with exact words to say. Use when the user mentions: presentation, talk, demo script, walk-through, slide deck, speaking outline, tech talk, show and tell, or wants to present a codebase or feature to an audience."
+managed_by: presentation-creator
+trigger: manual
+description: "\"Create code walk-through presentation scripts with file:line references and speaker notes. Produces a structured outline where each talking point opens a specific file at a specific line with exact words to say. Use when the user mentions: presentation, talk, demo script, walk-through, slide deck, speaking outline, tech talk, show and tell, or wants to present a codebase or feature to an audience.\""
 ---
 
 # Code Walk-Through Presentation Creator
@@ -105,7 +106,9 @@ Structure the presentation using one of these patterns (or a custom one the user
 
 Pattern D works best when the audience already lives with the problem and you're showing them a solution. Lead with empathy, not features.
 
-### Step 4: Assign Time Budgets
+### Step 4: Pacing and Time Budgets
+
+### Assign Time Budgets
 
 | Talk Length | Sections | Avg per Section |
 |-------------|----------|-----------------|
@@ -119,6 +122,41 @@ Rules of thumb:
 - Deep-dive sections get 3-5 min
 - Overview/context sections get 1-2 min
 - Budget 10% over and note what to trim -- talks always run long
+
+### Pacing Calibration
+
+Rough estimates for calibrating section length:
+
+| Content Type | Lines of SAY | Approx Duration |
+|-------------|-------------|-----------------|
+| Single OPEN + SAY | 3-4 sentences | 30-45 sec |
+| Sub-section (2-3 OPEN+SAY) | 8-12 sentences | 1.5-2 min |
+| Deep-dive section (4-6 OPEN+SAY) | 15-25 sentences | 3-5 min |
+
+A 25-minute talk typically has 30-45 OPEN directives total.
+
+### Time Budget Table
+
+Always include a time budget table near the end:
+
+```markdown
+## Time Budget
+
+| Section | Minutes |
+|---------|---------|
+| 1. Intro | 1 |
+| 2. What Is It | 3 |
+| ... | ... |
+| **Total** | **N min** |
+```
+
+If the total exceeds the target, add a note identifying which sections to trim and which are untouchable.
+
+**Trim and protect guidance is mandatory.** Every presentation must include:
+- **Protected sections:** Name 2-3 sections that are the core of the talk and should never be cut. These are the sections the audience will remember.
+- **Trim targets:** Name 2-3 sections that can be compressed to a single sentence or cut entirely without breaking the narrative arc. Explain how much time each trim saves.
+- **If running long:** Which sections to abbreviate first (the screen can carry the weight if the speaker shortens the narration).
+- **If running tight:** Which sections can absorb extra time if the talk is finishing early (usually the deep-dive section or Q&A).
 
 ### Step 5: Write the OPEN + SAY Pairs
 
@@ -186,44 +224,12 @@ A SAY block that describes what's visible on screen ("This file contains the sca
 - "So the scan is done. What happens next?"
 - "This is the centerpiece -- the most commands, the most domain knowledge."
 
----
-
-## Pacing Calibration
-
-Rough estimates for calibrating section length:
-
-| Content Type | Lines of SAY | Approx Duration |
-|-------------|-------------|-----------------|
-| Single OPEN + SAY | 3-4 sentences | 30-45 sec |
-| Sub-section (2-3 OPEN+SAY) | 8-12 sentences | 1.5-2 min |
-| Deep-dive section (4-6 OPEN+SAY) | 15-25 sentences | 3-5 min |
-
-A 25-minute talk typically has 30-45 OPEN directives total.
-
----
-
-## Time Budget Table
-
-Always include a time budget table near the end:
-
-```markdown
-## Time Budget
-
-| Section | Minutes |
-|---------|---------|
-| 1. Intro | 1 |
-| 2. What Is It | 3 |
-| ... | ... |
-| **Total** | **N min** |
-```
-
-If the total exceeds the target, add a note identifying which sections to trim and which are untouchable.
-
-**Trim and protect guidance is mandatory.** Every presentation must include:
-- **Protected sections:** Name 2-3 sections that are the core of the talk and should never be cut. These are the sections the audience will remember.
-- **Trim targets:** Name 2-3 sections that can be compressed to a single sentence or cut entirely without breaking the narrative arc. Explain how much time each trim saves.
-- **If running long:** Which sections to abbreviate first (the screen can carry the weight if the speaker shortens the narration).
-- **If running tight:** Which sections can absorb extra time if the talk is finishing early (usually the deep-dive section or Q&A).
+**Constraints:**
+- Every `**OPEN**` path must be a real file that was read during preparation. Never fabricate paths or line numbers.
+- SAY blocks must reference the actual content at the cited lines. If line 42 contains a function declaration, the SAY block should talk about that function.
+- Prefer showing source files over generated/compiled output.
+- When the same file is opened multiple times, use different line ranges each time (scroll through it, don't repeat).
+- The document must be self-contained -- a speaker who reads only this document can deliver the talk without additional prep.
 
 ---
 
@@ -240,13 +246,3 @@ A presentation sounds wrong when the SAY blocks are written in a generic voice a
 5. **Test with the ear, not the eye.** Read SAY blocks aloud. If they sound like someone else wrote them, they need revision.
 
 **When no voice guide is provided:** Default to conversational technical; the voice of a senior engineer explaining something to a peer over coffee. Direct, specific, occasional dry humor, no sales pitch.
-
----
-
-## Constraints
-
-- Every `**OPEN**` path must be a real file that was read during preparation. Never fabricate paths or line numbers.
-- SAY blocks must reference the actual content at the cited lines. If line 42 contains a function declaration, the SAY block should talk about that function.
-- Prefer showing source files over generated/compiled output.
-- When the same file is opened multiple times, use different line ranges each time (scroll through it, don't repeat).
-- The document must be self-contained -- a speaker who reads only this document can deliver the talk without additional prep.

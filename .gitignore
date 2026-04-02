@@ -8,6 +8,14 @@
 .cursor/
 .windsurf/
 
+# Node
+node_modules/
+dist/
+
+# Skill cache and agent state
+.skill-cache/
+.agent/
+
 # Logs
 *.log
 logs/
