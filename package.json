@@ -1,10 +1,10 @@
 {
-  "name": "presentation-creator",
+  "name": "tech-demo-director",
   "version": "1.0.0",
-  "description": "Code walk-through presentation skill + companion CLI for AI coding tools",
+  "description": "Tech demo scripting skill + companion CLI for AI coding tools",
   "type": "module",
   "bin": {
-    "presentation-util": "./dist/cli/index.js"
+    "demo-director": "./dist/cli/index.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

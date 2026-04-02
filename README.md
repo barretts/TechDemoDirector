@@ -1,4 +1,4 @@
-# presentation-creator
+# tech-demo-director
 
 Code walk-through presentation skill + companion CLI for AI coding tools. Skills are markdown prompt files composed from shared fragments and compiled to 7 IDE-specific formats.
 
@@ -46,7 +46,7 @@ Skills (what to do)          CLI Utility (tools to do it with)
 
 **Fragments** are shared knowledge blocks included by multiple skills via `{{include:...}}` markers. Edit a fragment once, recompile, and every skill gets the update.
 
-**The CLI** (`presentation-util`) provides structured JSON commands that skills invoke.
+**The CLI** (`demo-director`) provides structured JSON commands that skills invoke.
 
 ## Project Layout
 
@@ -59,7 +59,7 @@ skill/
     common/             # Shared rules (output format, SAY block guidelines)
     domain/             # Deep domain knowledge (pacing, voice, narrative patterns)
   skills/
-    presentation-creator/   # The main skill source
+    tech-demo-director/     # The main skill source
 
 src/                    # Companion CLI (TypeScript)
   cli/                  # Commander entry point + commands

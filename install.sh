@@ -9,10 +9,10 @@ set -e
 # CONFIGURE: Change these values for your project
 # ===========================================================================
 
-PROJECT_NAME="presentation-creator"             # Used in log messages
-CLI_BIN_NAME="presentation-util"                # The bin name from package.json
-MANAGED_MARKER="managed_by: presentation-creator"  # Must match compile.mjs MANAGED_BY
-SKILLS=("presentation-creator")                 # All skill names from manifest.json
+PROJECT_NAME="tech-demo-director"               # Used in log messages
+CLI_BIN_NAME="demo-director"                    # The bin name from package.json
+MANAGED_MARKER="managed_by: tech-demo-director" # Must match compile.mjs MANAGED_BY
+SKILLS=("tech-demo-director")                   # All skill names from manifest.json
 
 # ===========================================================================
 # End configuration
@@ -34,13 +34,16 @@ CODEX_SKILLS_DIR="$CODEX_HOME_DIR/skills"
 
 cleanup_managed() {
   local dir="$1"
-  [[ -d "$dir" ]] || return
-  grep -rl "$MANAGED_MARKER" "$dir" 2>/dev/null | while read -r f; do
+  [[ -d "$dir" ]] || return 0
+  local managed_files
+  managed_files="$(grep -rl "$MANAGED_MARKER" "$dir" 2>/dev/null || true)"
+  [[ -z "$managed_files" ]] && return 0
+  while IFS= read -r f; do
     rm -f "$f"
     local parent; parent="$(dirname "$f")"
     [[ "$parent" != "$dir" ]] && rmdir "$parent" 2>/dev/null || true
     echo "    Removed: $f"
-  done
+  done <<< "$managed_files"
 }
 
 # --- Install functions (copy from compiled/ output) ---

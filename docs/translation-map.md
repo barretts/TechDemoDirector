@@ -1,6 +1,6 @@
 # Translation Map (Codex, Cursor, Claude, Windsurf)
 
-Use this map to port the presentation-creator skill to different platform surfaces without changing the core workflow.
+Use this map to port the tech-demo-director skill to different platform surfaces without changing the core workflow.
 
 ## Invariant Layer (Never Change)
 

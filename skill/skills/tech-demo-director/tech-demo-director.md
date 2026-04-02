@@ -1,9 +1,9 @@
 ---
-name: presentation-creator
+name: tech-demo-director
 description: "Create code walk-through presentation scripts with file:line references and speaker notes. Produces a structured outline where each talking point opens a specific file at a specific line with exact words to say. Use when the user mentions: presentation, talk, demo script, walk-through, slide deck, speaking outline, tech talk, show and tell, or wants to present a codebase or feature to an audience."
 ---
 
-# Code Walk-Through Presentation Creator
+# Tech Demo Director
 
 Create presentation scripts that guide a speaker through opening files at specific lines in their editor while narrating with prepared speaker notes. The output is a single markdown document that serves as both teleprompter and file-navigation checklist.
 
