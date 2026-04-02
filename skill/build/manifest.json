@@ -1,0 +1,29 @@
+{
+  "targets": [
+    "claude",
+    "cursor-rules",
+    "cursor-skills",
+    "windsurf-rules",
+    "windsurf-skills",
+    "opencode",
+    "codex"
+  ],
+  "skills": {
+    "presentation-creator": {
+      "source": "skills/presentation-creator/presentation-creator.md",
+      "fragments": [
+        "common/output-format.md",
+        "common/say-block-guidelines.md",
+        "domain/narrative-patterns.md",
+        "domain/pacing-calibration.md",
+        "domain/screen-speaker.md",
+        "domain/voice-guide.md"
+      ]
+    }
+  },
+  "naming_rules": {
+    "case": "lowercase",
+    "separator": "-",
+    "forbidden_suffixes": ["final", "new", "latest", "v2"]
+  }
+}

@@ -1,35 +1,19 @@
 # presentation-creator
 
-Portable skill for AI coding tools that creates code walk-through presentation scripts with file:line OPEN directives and speaker notes.
+Code walk-through presentation skill + companion CLI for AI coding tools. Skills are markdown prompt files composed from shared fragments and compiled to 7 IDE-specific formats.
 
-## What This Repo Contains
-
-- `skill/SKILL.md` -- canonical skill entrypoint (output format, six-step workflow, pacing, constraints)
-- `platforms/` -- thin translation layers for Cursor, Claude, Windsurf, Codex, and OpenCode
-- `install.sh` -- multi-platform installer
-
-## Install
+## Quick Start
 
 ```bash
+# Install dependencies, build CLI, compile skills, install for detected tools
 bash install.sh
-```
 
-No flags auto-detects which tools are installed. Target a specific tool:
-
-```bash
-bash install.sh --cursor
+# Or target specific tools
 bash install.sh --claude
-bash install.sh --windsurf
-bash install.sh --opencode
-bash install.sh --codex
 bash install.sh --all
-```
 
-Uninstall:
-
-```bash
+# Uninstall
 bash install.sh --uninstall
-bash install.sh --cursor --uninstall
 ```
 
 ## What It Does
@@ -45,9 +29,85 @@ The six-step workflow:
 5. Write the OPEN + SAY pairs
 6. Add the quick reference (numbered file:line list)
 
-## Core Design
+## Architecture
 
-The skill is a single markdown document that any AI coding tool can consume. Platform wrappers are thin routing layers that point the tool at the canonical skill without redefining the workflow or output format.
+```
+Skills (what to do)          CLI Utility (tools to do it with)
+  skill/skills/*.md            src/cli/commands/*.ts
+  skill/fragments/*.md         src/core/*.ts
+          |                            |
+          v                            v
+  compiled/ (7 IDE formats)    dist/ (npm link -> global CLI)
+          |                            |
+          +---------> Agent <----------+
+```
+
+**Skills** are step-by-step runbooks that agents follow. They reference the CLI by name.
+
+**Fragments** are shared knowledge blocks included by multiple skills via `{{include:...}}` markers. Edit a fragment once, recompile, and every skill gets the update.
+
+**The CLI** (`presentation-util`) provides structured JSON commands that skills invoke.
+
+## Project Layout
+
+```
+skill/
+  build/
+    manifest.json       # Declares skills, fragment deps, compilation targets
+    compile.mjs         # Compiler: resolves includes, transforms frontmatter
+  fragments/
+    common/             # Shared rules (output format, SAY block guidelines)
+    domain/             # Deep domain knowledge (pacing, voice, narrative patterns)
+  skills/
+    presentation-creator/   # The main skill source
+
+src/                    # Companion CLI (TypeScript)
+  cli/                  # Commander entry point + commands
+  core/                 # Domain logic modules
+  cache/                # Two-tier cache (memory + disk)
+  errors/               # Typed error hierarchy
+
+compiled/               # Machine-generated, one subdir per IDE target
+contributions/          # Field observations from real runs
+docs/                   # Research artifacts and reference material
+```
+
+## How to Add a Skill
+
+1. Create the source at `skill/skills/<name>/<name>.md` with YAML frontmatter and `{{include:...}}` markers.
+2. Register it in `skill/build/manifest.json`.
+3. Add the skill name to the `SKILLS` array in `install.sh`.
+4. Compile: `npm run compile`
+
+## How to Add a Fragment
+
+1. Create at `skill/fragments/<category>/<name>.md` (no frontmatter).
+2. Include in skills with `{{include:<category>/<name>.md}}`.
+3. Declare in `manifest.json` under each skill's `fragments` array.
+
+## Development
+
+```bash
+npm install              # Install dependencies
+npm run build            # Build TypeScript CLI
+npm run compile          # Compile skills to all 7 IDE targets
+npm run compile:validate # Validate without writing output
+npm run compile:watch    # Recompile on change
+npm run test             # Run tests
+npm run typecheck        # Type-check without emitting
+```
+
+## Compilation Targets
+
+| Target | Output path |
+|--------|------------|
+| `claude` | `compiled/claude/<skill>/SKILL.md` |
+| `cursor-rules` | `compiled/cursor/rules/<skill>.mdc` |
+| `cursor-skills` | `compiled/cursor/skills/<skill>/SKILL.md` |
+| `windsurf-rules` | `compiled/windsurf/rules/<skill>.md` |
+| `windsurf-skills` | `compiled/windsurf/skills/<skill>/SKILL.md` |
+| `opencode` | `compiled/opencode/<skill>.md` |
+| `codex` | `compiled/codex/<skill>/SKILL.md` |
 
 ## License
 
