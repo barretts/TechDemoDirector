@@ -2,7 +2,10 @@
 managed_by: tech-demo-director
 mode: subagent
 description: "\"Create code walk-through presentation scripts with file:line references and speaker notes. Produces a structured outline where each talking point opens a specific file at a specific line with exact words to say. Use when the user mentions: presentation, talk, demo script, walk-through, slide deck, speaking outline, tech talk, show and tell, or wants to present a codebase or feature to an audience.\""
-tools: bash, read, write, edit, list, glob, grep
+permission:
+  bash: allow
+  edit: allow
+  webfetch: allow
 ---
 
 # Tech Demo Director
