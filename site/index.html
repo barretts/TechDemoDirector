@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechDemoDirector</title>
+  <meta name="description" content="Code walk-through presentation scripting with file:line references and speaker notes for AI coding tools." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="container">
+        <h1 class="logo">Tech<span class="accent">DemoDirector</span></h1>
+        <p class="tagline">Code walk-through presentation scripting</p>
+        <p class="subtitle">File:line references. Speaker notes. One markdown artifact.</p>
+        <div class="cta-row">
+          <a href="https://github.com/barretts/TechDemoDirector" class="btn btn-primary">View on GitHub</a>
+          <a href="#workflow" class="btn btn-secondary">How It Works</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="workflow" class="workflow">
+      <div class="container">
+        <h2>Six-Step Workflow</h2>
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <span class="step-num">1</span>
+            <span>Understand the subject</span>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num">2</span>
+            <span>Explore the codebase</span>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num">3</span>
+            <span>Build the narrative arc</span>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num">4</span>
+            <span>Assign time budgets</span>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num">5</span>
+            <span>Write OPEN + SAY pairs</span>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num">6</span>
+            <span>Add quick reference</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <h2>What It Produces</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="card-icon">1</div>
+            <h3>OPEN Directives</h3>
+            <p>Each talking point opens a specific file at a specific line range. No fumbling for the right spot during a live demo.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">2</div>
+            <h3>SAY Blocks</h3>
+            <p>Full sentences the speaker reads aloud. Not bullet points &mdash; complete thoughts paced for delivery.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">3</div>
+            <h3>Narrative Arcs</h3>
+            <p>Four pre-built patterns (linear, layered, problem-solution, before-after) or define your own.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">4</div>
+            <h3>Time Budgets</h3>
+            <p>Per-section time targets with trim/protect guidance so the talk fits the slot.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="install-section">
+      <div class="container">
+        <h2>Quick Start</h2>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <pre><code><span class="prompt">$</span> git clone https://github.com/barretts/TechDemoDirector.git
+<span class="prompt">$</span> cd TechDemoDirector
+<span class="prompt">$</span> npm install && npm run build && npm run compile
+<span class="prompt">$</span> bash install.sh --all
+<span class="dim">--&gt; Installing skills for all detected tools...</span>
+<span class="success">==&gt; Done.</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="architecture">
+      <div class="container">
+        <h2>Architecture</h2>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <pre><code>Skills (what to do)          CLI Companion (tools to do it with)
+  skill/skills/*.md            src/cli/commands/*.ts
+  skill/fragments/*.md         src/core/*.ts
+          |                            |
+          v                            v
+  compiled/ (7 IDE formats)    dist/ (npm link -> global CLI)
+          |                            |
+          +---------> Agent <----------+</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="ecosystem">
+      <div class="container">
+        <h2>Ecosystem</h2>
+        <p>Part of the <a href="https://agenticskillmill.com">Agentic Skill Mill</a> family.</p>
+        <div class="grid">
+          <div class="card">
+            <h3><a href="https://agenticskillmill.com">Agentic Skill Mill</a></h3>
+            <p>The parent project &mdash; fragment-composed skills compiled to 7 IDE targets with a companion CLI.</p>
+            <p><a href="https://github.com/barretts/AgenticSkillMill">GitHub</a></p>
+          </div>
+          <div class="card">
+            <h3><a href="https://agentthreader.com">AgentThreader</a></h3>
+            <p>Manifest-driven agentic CLI orchestration with structured contracts, resumable state, and self-healing.</p>
+            <p><a href="https://github.com/barretts/AgentThreader">GitHub</a></p>
+          </div>
+          <div class="card">
+            <h3><a href="https://agenthistoric.com">AgentHistoric</a></h3>
+            <p>Mixture-of-Experts persona prompt system with philosophical grounding.</p>
+            <p><a href="https://github.com/barretts/AgentHistoric">GitHub</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>MIT License &middot; <a href="https://github.com/barretts/TechDemoDirector">github.com/barretts/TechDemoDirector</a></p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
