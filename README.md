@@ -109,6 +109,16 @@ npm run typecheck        # Type-check without emitting
 | `opencode` | `compiled/opencode/<skill>.md` |
 | `codex` | `compiled/codex/<skill>/SKILL.md` |
 
+## Ecosystem
+
+TechDemoDirector is built on the skill-system-template architecture from [Agentic Skill Mill](https://github.com/barretts/AgenticSkillMill). Related projects:
+
+| Project | Role | Links |
+|---------|------|-------|
+| **[Agentic Skill Mill](https://github.com/barretts/AgenticSkillMill)** | Parent — defines the fragment-composition, 7-target compiler, and companion-CLI pattern | [agenticskillmill.com](https://agenticskillmill.com) |
+| **[AgentThreader](https://github.com/barretts/AgentThreader)** | Sibling — manifest-driven agentic CLI orchestration with contracts and self-healing | [agentthreader.com](https://agentthreader.com) |
+| **[AgentHistoric](https://github.com/barretts/AgentHistoric)** | Sibling — MoE persona prompt system with philosophical grounding | [agenthistoric.com](https://agenthistoric.com) |
+
 ## License
 
 MIT. See [LICENSE](./LICENSE).
