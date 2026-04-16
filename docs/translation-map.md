@@ -19,6 +19,7 @@ Use this map to port the tech-demo-director skill to different platform surfaces
 - Where the skill file is located on disk
 - Approval or confirmation handling
 - Platform-specific UX wording
+- Frontmatter fields (OpenCode uses `permission` as a YAML object with `bash`, `edit`, `webfetch` keys; Cursor uses `description` + `alwaysApply`; Windsurf uses `trigger` + `description`; Claude/Codex use pass-through with `managed_by` marker)
 
 ## Key Format Elements
 

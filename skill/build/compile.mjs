@@ -137,7 +137,7 @@ function buildFrontmatter(fields) {
  *   cursor-skills  -- Pass-through with managed_by marker
  *   windsurf-rules -- Strips frontmatter, emits trigger + description
  *   windsurf-skills -- Pass-through with managed_by marker
- *   opencode       -- Strips frontmatter, emits mode + description + tools
+ *   opencode       -- Strips frontmatter, emits mode + description + permission
  *   codex          -- Pass-through with managed_by marker
  */
 function compileTarget(targetName, skillName, resolvedContent) {
