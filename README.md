@@ -4,13 +4,29 @@ Code walk-through presentation skill + companion CLI for AI coding tools. Skills
 
 ## Quick Start
 
-```bash
-# Install dependencies, build CLI, compile skills, install for detected tools
-bash install.sh
+### One-Line Install
 
-# Or target specific tools
+```bash
+bash <(curl -fsSL https://barretts.github.io/TechDemoDirector/install.sh)
+```
+
+```powershell
+irm https://barretts.github.io/TechDemoDirector/install.ps1 | iex
+```
+
+### From Source
+
+```bash
+git clone https://github.com/barretts/TechDemoDirector.git
+cd TechDemoDirector
+bash install.sh --all        # Linux/macOS
+.\install.ps1 -All           # Windows (PowerShell)
+```
+
+```bash
+# Target specific tools
 bash install.sh --claude
-bash install.sh --all
+bash install.sh --opencode
 
 # Uninstall
 bash install.sh --uninstall
