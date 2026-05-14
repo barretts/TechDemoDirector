@@ -1,0 +1,1 @@
+{"version":3,"file":"extract-sequence.d.ts","sourceRoot":"","sources":["../../../src/cli/commands/extract-sequence.ts"],"names":[],"mappings":"AAAA,OAAO,EAAmB,KAAK,qBAAqB,EAAE,MAAM,gCAAgC,CAAC;AAE7F,MAAM,WAAW,6BAA6B;IAC5C,WAAW,EAAE,MAAM,CAAC;IACpB,IAAI,EAAE,OAAO,CAAC;CACf;AAED;;;GAGG;AACH,wBAAsB,sBAAsB,CAC1C,OAAO,EAAE,6BAA6B,GACrC,OAAO,CAAC,qBAAqB,CAAC,CAEhC"}

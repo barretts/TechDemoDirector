@@ -1,0 +1,1 @@
+{"version":3,"file":"extract-sequence.js","sourceRoot":"","sources":["../../../src/cli/commands/extract-sequence.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAA8B,MAAM,gCAAgC,CAAC;AAO7F;;;GAGG;AACH,MAAM,CAAC,KAAK,UAAU,sBAAsB,CAC1C,OAAsC;IAEtC,OAAO,eAAe,CAAC,OAAO,CAAC,WAAW,CAAC,CAAC;AAC9C,CAAC"}
