@@ -19,6 +19,11 @@ SKILLS=("tech-demo-director")                   # All skill names from manifest.
 # ===========================================================================
 
 SKILL_DIR="$(cd "$(dirname "$0")" && pwd)"
+SOURCE_BUILD_AVAILABLE=false
+
+if [[ -d "$SKILL_DIR/src" && -f "$SKILL_DIR/skill/build/compile.mjs" ]]; then
+  SOURCE_BUILD_AVAILABLE=true
+fi
 
 # --- Target directories ---
 CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
@@ -169,6 +174,10 @@ done
 # --- Compile-only path ---
 
 if [[ "$DO_COMPILE_ONLY" == true ]]; then
+  if [[ "$SOURCE_BUILD_AVAILABLE" != true ]]; then
+    echo "ERROR: --compile-only requires the source branch (dev). Static main installs release artifacts only."
+    exit 1
+  fi
   echo "==> Delegating to compile.mjs..."
   node "$SKILL_DIR/skill/build/compile.mjs"
   exit $?
@@ -216,20 +225,30 @@ echo "    Targets: ${TARGETS[*]}"
 echo ""
 
 if [[ "$DO_BUILD" == true ]]; then
-  echo "--> Installing dependencies..."
-  npm install
+  if [[ "$SOURCE_BUILD_AVAILABLE" == true ]]; then
+    echo "--> Installing dependencies..."
+    npm install
 
-  echo "--> Cleaning previous build..."
-  rm -rf "$SKILL_DIR/dist"
+    echo "--> Cleaning previous build..."
+    rm -rf "$SKILL_DIR/dist"
 
-  echo "--> Building TypeScript..."
-  npm run build
-  chmod +x "$SKILL_DIR/dist/cli/index.js"
+    echo "--> Building TypeScript..."
+    npm run build
+    chmod +x "$SKILL_DIR/dist/cli/index.js"
 
-  echo "--> Compiling skills..."
-  npm run compile
+    echo "--> Compiling skills..."
+    npm run compile
+  else
+    if [[ ! -f "$SKILL_DIR/dist/cli/index.js" || ! -d "$SKILL_DIR/compiled" ]]; then
+      echo "ERROR: Static release is missing dist/ or compiled/. Use the dev branch to rebuild release artifacts."
+      exit 1
+    fi
+    echo "--> Installing runtime dependencies from static release..."
+    npm install --omit=dev
+    chmod +x "$SKILL_DIR/dist/cli/index.js"
+  fi
 
-  echo "--> Installing $CLI_BIN_NAME CLI globally..."
+  echo "--> Linking $CLI_BIN_NAME CLI globally..."
   npm link
 
   NPM_BIN="$(npm prefix -g)/bin"

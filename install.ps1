@@ -40,6 +40,7 @@ $Skills         = @("tech-demo-director")
 # ===========================================================================
 
 $SkillDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$SourceBuildAvailable = (Test-Path (Join-Path $SkillDir "src")) -and (Test-Path (Join-Path $SkillDir "skill/build/compile.mjs"))
 
 # --- Target directories ---
 $Home_ = $env:USERPROFILE
@@ -162,6 +163,10 @@ if ($Codex)    { $Targets += "codex" }
 # --- Compile-only path ---
 
 if ($CompileOnly) {
+    if (-not $SourceBuildAvailable) {
+        Write-Host "ERROR: -CompileOnly requires the source branch (dev). Static main installs release artifacts only." -ForegroundColor Red
+        exit 1
+    }
     Write-Host "==> Delegating to compile.mjs..."
     & node (Join-Path $SkillDir "skill/build/compile.mjs")
     exit $LASTEXITCODE
@@ -201,26 +206,35 @@ Write-Host "    Targets: $($Targets -join ' ')"
 Write-Host ""
 
 if (-not $SkillsOnly) {
-    Write-Host "--> Installing dependencies..."
     Push-Location $SkillDir
     try {
-        & npm install
-        if ($LASTEXITCODE -ne 0) { throw "npm install failed" }
+        if ($SourceBuildAvailable) {
+            Write-Host "--> Installing dependencies..."
+            & npm install
+            if ($LASTEXITCODE -ne 0) { throw "npm install failed" }
 
-        Write-Host "--> Cleaning previous build..."
-        if (Test-Path (Join-Path $SkillDir "dist")) {
-            Remove-Item (Join-Path $SkillDir "dist") -Recurse -Force
+            Write-Host "--> Cleaning previous build..."
+            if (Test-Path (Join-Path $SkillDir "dist")) {
+                Remove-Item (Join-Path $SkillDir "dist") -Recurse -Force
+            }
+
+            Write-Host "--> Building TypeScript..."
+            & npm run build
+            if ($LASTEXITCODE -ne 0) { throw "npm run build failed" }
+
+            Write-Host "--> Compiling skills..."
+            & npm run compile
+            if ($LASTEXITCODE -ne 0) { throw "npm run compile failed" }
+        } else {
+            if (-not (Test-Path (Join-Path $SkillDir "dist/cli/index.js")) -or -not (Test-Path (Join-Path $SkillDir "compiled"))) {
+                throw "Static release is missing dist/ or compiled/. Use the dev branch to rebuild release artifacts."
+            }
+            Write-Host "--> Installing runtime dependencies from static release..."
+            & npm install --omit=dev
+            if ($LASTEXITCODE -ne 0) { throw "npm install --omit=dev failed" }
         }
 
-        Write-Host "--> Building TypeScript..."
-        & npm run build
-        if ($LASTEXITCODE -ne 0) { throw "npm run build failed" }
-
-        Write-Host "--> Compiling skills..."
-        & npm run compile
-        if ($LASTEXITCODE -ne 0) { throw "npm run compile failed" }
-
-        Write-Host "--> Installing $CliBinName CLI globally..."
+        Write-Host "--> Linking $CliBinName CLI globally..."
         & npm link
         if ($LASTEXITCODE -ne 0) { throw "npm link failed" }
 

@@ -10,7 +10,6 @@
 
 # Node
 node_modules/
-dist/
 
 # Skill cache and agent state
 .skill-cache/

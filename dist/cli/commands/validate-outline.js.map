@@ -1,0 +1,1 @@
+{"version":3,"file":"validate-outline.js","sourceRoot":"","sources":["../../../src/cli/commands/validate-outline.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAA+C,MAAM,gCAAgC,CAAC;AAM9G;;;GAGG;AACH,MAAM,CAAC,KAAK,UAAU,sBAAsB,CAC1C,OAAsC;IAEtC,OAAO,eAAe,CAAC;QACrB,WAAW,EAAE,OAAO,CAAC,WAAW;QAChC,OAAO,EAAE,OAAO,CAAC,OAAO;QACxB,cAAc,EAAE,OAAO,CAAC,cAAc;KACvC,CAAC,CAAC;AACL,CAAC"}
